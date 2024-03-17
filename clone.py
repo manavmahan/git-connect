@@ -50,10 +50,10 @@ if __name__ == "__main__":
                         REPO,
                         env=dict(GIT_SSH_COMMAND=git_ssh_cmd))
     elif ACTION == "push":
-        r = Repo(REPO)
+        r = Repo(f"{REPO}/.git")
         origin = r.remote(name='origin')
         origin.push(env=dict(GIT_SSH_COMMAND=git_ssh_cmd))
     elif ACTION == "pull":
-        r = Repo(REPO)
+        r = Repo(f"{REPO}/.git")
         origin = r.remote(name='origin')
         origin.pull(env=dict(GIT_SSH_COMMAND=git_ssh_cmd))
