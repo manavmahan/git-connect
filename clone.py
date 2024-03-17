@@ -7,7 +7,7 @@ from git import Repo
 
 ID_FILE = "id_rsa"
 
-def get_input(arg_index):
+def get_input(arg_index, key):
     if sys.argv[arg_index]:
         return sys.argv[arg_index]
     return input(f"Enter {key}")
