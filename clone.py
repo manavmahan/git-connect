@@ -5,19 +5,27 @@ import os
 import sys
 from git import Repo
 
-ID_FILE = "id_rsa"
+ID_FILE = "key"
+
 
 def get_input(arg_index, key):
-    if sys.argv[arg_index]:
+    if len(sys.argv) > arg_index and sys.argv[arg_index]:
         return sys.argv[arg_index]
     return input(f"Enter {key}")
+
 
 UNAME = get_input(1, "Enter GitHub Username:\t")
 REPO = get_input(2, "Enter Repository Name:\t")
 
-KEY = os.environ['GIT_KEY']
+KEY = os.environ.get('GIT_KEY')
 if KEY is None:
-    KEY = input(f"Enter SSH Key to connect to GitHub\n")
+    KEY = ""
+    print("Paste SSH Key to connect to GitHub...")
+    while True:
+        line = input()
+        KEY += line + "\n"
+        if not line:
+            break
 
 if __name__ == "__main__":
     with open(ID_FILE, 'w') as f:
