@@ -28,8 +28,9 @@ assert (ACTION in ('clone', 'push', 'pull')), "Only clone, push, and pull action
 UNAME = get_input(2, "Enter GitHub Username:\t")
 REPO = get_input(3, "Enter Repository Name:\t")
 
+key_required = not os.path.is_file(ID_FILE)
 KEY = os.environ.get('GIT_KEY')
-if KEY is None:
+if KEY is None and key_required:
     KEY = ""
     print("Paste SSH Key to connect to GitHub...")
     while True:
@@ -39,9 +40,10 @@ if KEY is None:
             break
 
 if __name__ == "__main__":
-    with open(ID_FILE, 'w') as f:
-        f.write(KEY)
-    os.chmod(ID_FILE, 0o400)
+    if key_required:
+        with open(ID_FILE, 'w') as f:
+            f.write(KEY)
+        os.chmod(ID_FILE, 0o400)
 
     git_ssh_cmd = "ssh -i %s" % ID_FILE
 
