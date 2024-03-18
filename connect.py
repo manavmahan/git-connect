@@ -56,4 +56,4 @@ if __name__ == "__main__":
     elif ACTION == "pull":
         r = Repo(f"{REPO}/.git")
         origin = r.remote(name='origin')
-        origin.pull(env=dict(GIT_SSH_COMMAND=git_ssh_cmd))
+        origin.fetch(env=dict(GIT_SSH_COMMAND=git_ssh_cmd))
