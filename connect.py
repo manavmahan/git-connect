@@ -28,7 +28,7 @@ assert (ACTION in ('clone', 'push', 'pull')), "Only clone, push, and pull action
 UNAME = get_input(2, "Enter GitHub Username:\t")
 REPO = get_input(3, "Enter Repository Name:\t")
 
-key_required = not os.path.is_file(ID_FILE)
+key_required = not os.path.isfile(ID_FILE)
 KEY = os.environ.get('GIT_KEY')
 if KEY is None and key_required:
     KEY = ""
